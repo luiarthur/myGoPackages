@@ -7,10 +7,10 @@ import (
 
 // Creates a matrix of ones, with parameters row and col.
 // Example:
-//   The following creates a matrix of 1's of dimension 2x3
+//   The following creates a matrix of 0's of dimension 2x3
 //   and assigns it to the variable m
 //   	 m := myStat.M1(2,3)
-func M1(row int, col int) mat64.Dense {
+func M0(row int, col int) mat64.Dense {
 	v := make([]float64, row*col)
 	M := mat64.NewDense(row, col, v)
 	return *M

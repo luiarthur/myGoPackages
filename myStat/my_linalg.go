@@ -3,6 +3,9 @@ package myStat
 import (
 	"fmt"
 	"github.com/gonum/matrix/mat64"
+	"io/ioutil" //ReadMatrix
+	"strconv"   //ReadMatrix
+	"strings"   //ReadMatrix
 )
 
 // Creates a matrix of ones, with parameters row and col.
@@ -30,4 +33,23 @@ func PrintMatrix(m mat64.Dense) (n int, err error) {
 		fmt.Printf("\n")
 	}
 	return
+}
+
+func ReadMatrix(file string) mat64.Dense {
+	bs, _ := ioutil.ReadFile(file)
+	str := string(bs)
+
+	rowStr := strings.Split(str, "\n")
+	rows := len(rowStr) - 1
+	cols := len(strings.Split(rowStr[0], " "))
+	dat := M0(rows, cols)
+	for i := 0; i < rows; i++ {
+		colStr := strings.Split(rowStr[i], " ")
+		for j := 0; j < cols; j++ {
+			d, _ := strconv.ParseFloat(colStr[j], 64)
+			dat.Set(i, j, d)
+		}
+	}
+
+	return dat
 }
